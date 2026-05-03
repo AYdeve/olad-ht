@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olad Hotel – Luxury & Comfort in Akure</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mike: #e8e0d5;
+    --mike-dark: #d4c9bb;
+    --mike-light: #f5f1ec;
+    --wine: #722f37;
+    --wine-dark: #4a1a1e;
+    --wine-light: #a04050;
+    --wine-muted: #8b3d47;
+    --gold: #c9a84c;
+    --gold-light: #e2c97e;
+    --text-dark: #1a0d0f;
+    --text-mid: #4a2e31;
+    --text-light: #f5f1ec;
+    --white: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--mike-light);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--wine-dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem;
+    height: 80px;
+    background: rgba(26, 13, 15, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    transition: all 0.3s;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 14px; text-decoration: none;
+  }
+  .logo-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--wine), var(--wine-dark));
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(201,168,76,0.3);
+    flex-shrink: 0;
+  }
+  .logo-text { display: flex; flex-direction: column; }
+  .logo-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--mike);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .logo-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px; font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none; align-items: center;
+  }
+  .nav-links a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--mike);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--gold);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-book {
+    background: var(--wine) !important;
+    color: var(--mike) !important;
+    padding: 10px 24px !important;
+    border: 1px solid var(--gold) !important;
+    transition: background 0.3s, color 0.3s !important;
+  }
+  .nav-book::after { display: none !important; }
+  .nav-book:hover { background: var(--gold) !important; color: var(--wine-dark) !important; }
+
+  /* HAMBURGER */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { display: block; width: 25px; height: 2px; background: var(--mike); transition: 0.3s; }
+  .mobile-menu {
+    display: none; position: fixed; top: 80px; left: 0; right: 0;
+    background: var(--wine-dark); z-index: 999; padding: 2rem;
+    flex-direction: column; gap: 1.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--mike);
+    text-decoration: none; padding: 0.5rem 0; border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  /* ── HERO ── */
+  #home {
+    height: 100vh; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(160deg, rgba(114,47,55,0.85) 0%, rgba(26,13,15,0.7) 50%, rgba(74,26,30,0.9) 100%),
+      url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1800&q=80') center/cover no-repeat;
+    animation: heroZoom 20s ease infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px
+    );
+  }
+  .hero-content {
+    position: relative; text-align: center; max-width: 800px; padding: 2rem;
+    animation: fadeUp 1.2s ease forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 900; color: var(--mike);
+    line-height: 0.9; letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title span { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 300; color: var(--mike-dark);
+    letter-spacing: 3px; margin-bottom: 3rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--wine); color: var(--mike);
+    padding: 16px 40px;
+    font-family: 'Montserrat', sans-serif; font-size: 11px;
+    font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    text-decoration: none; border: 1px solid var(--gold);
+    transition: all 0.3s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); color: var(--wine-dark); }
+  .btn-outline {
+    background: transparent; color: var(--mike);
+    padding: 16px 40px;
+    font-family: 'Montserrat', sans-serif; font-size: 11px;
+    font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    text-decoration: none; border: 1px solid var(--mike-dark);
+    transition: all 0.3s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--gold); font-family: 'Montserrat', sans-serif;
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  .hero-scroll::after {
+    content: ''; width: 1px; height: 40px; background: var(--gold); display: block;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section-label {
+    font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 600;
+    letter-spacing: 5px; text-transform: uppercase; color: var(--wine);
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+  }
+  .section-label::before {
+    content: ''; width: 30px; height: 1px; background: var(--wine);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700; line-height: 1.1;
+    color: var(--wine-dark); margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--wine); }
+  .section-desc {
+    font-size: 1.15rem; font-weight: 300; line-height: 1.8;
+    color: var(--text-mid); max-width: 560px;
+  }
+
+  /* ── ABOUT STRIP ── */
+  .features-strip {
+    background: var(--wine-dark); padding: 50px 0;
+    border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
+  }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  }
+  .feature-item {
+    text-align: center; padding: 2rem;
+    border-right: 1px solid rgba(201,168,76,0.2);
+  }
+  .feature-item:last-child { border-right: none; }
+  .feature-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .feature-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; font-weight: 900; color: var(--gold);
+    line-height: 1;
+  }
+  .feature-label {
+    font-family: 'Montserrat', sans-serif; font-size: 9px;
+    font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--mike-dark); margin-top: 4px;
+  }
+
+  /* ── ROOMS ── */
+  #rooms { background: var(--mike-light); }
+  .rooms-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem;
+  }
+  .room-card {
+    background: var(--white); overflow: hidden;
+    box-shadow: 0 4px 30px rgba(114,47,55,0.1);
+    transition: transform 0.4s, box-shadow 0.4s;
+  }
+  .room-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(114,47,55,0.2); }
+  .room-img {
+    height: 260px; overflow: hidden; position: relative;
+  }
+  .room-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .room-card:hover .room-img img { transform: scale(1.08); }
+  .room-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--wine); color: var(--mike);
+    font-family: 'Montserrat', sans-serif; font-size: 9px;
+    font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 14px;
+  }
+  .room-body { padding: 1.8rem; }
+  .room-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--wine-dark);
+    margin-bottom: 0.5rem;
+  }
+  .room-desc {
+    font-size: 0.95rem; color: var(--text-mid);
+    line-height: 1.7; margin-bottom: 1.2rem;
+  }
+  .room-amenities {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;
+  }
+  .amenity {
+    font-family: 'Montserrat', sans-serif; font-size: 9px;
+    font-weight: 500; letter-spacing: 1px;
+    color: var(--wine); border: 1px solid var(--wine-muted);
+    padding: 4px 10px;
+  }
+  .room-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 1.2rem; border-top: 1px solid var(--mike-dark);
+  }
+  .room-price { font-family: 'Playfair Display', serif; }
+  .room-price .from { font-size: 10px; font-weight: 300; color: var(--text-mid); letter-spacing: 1px; }
+  .room-price .amount { font-size: 1.8rem; font-weight: 700; color: var(--wine-dark); }
+  .room-price .per { font-size: 10px; color: var(--text-mid); }
+  .btn-sm {
+    background: var(--wine); color: var(--mike);
+    padding: 10px 22px;
+    font-family: 'Montserrat', sans-serif; font-size: 10px;
+    font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; border: 1px solid transparent;
+    transition: all 0.3s; cursor: pointer; border: none;
+    display: inline-block;
+  }
+  .btn-sm:hover { background: var(--gold); color: var(--wine-dark); }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--wine-dark); padding: 80px 0; }
+  #gallery .section-label { color: var(--gold); }
+  #gallery .section-label::before { background: var(--gold); }
+  #gallery .section-title { color: var(--mike); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 250px 250px;
+    gap: 1rem; margin-top: 3rem;
+  }
+  .g-item {
+    overflow: hidden; position: relative; cursor: pointer;
+  }
+  .g-item:first-child { grid-row: 1 / 3; }
+  .g-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .g-item:hover img { transform: scale(1.1); }
+  .g-item::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(114,47,55,0.7) 100%);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .g-item:hover::after { opacity: 1; }
+
+  /* ── RESTAURANT ── */
+  #restaurant { background: var(--mike-light); }
+  .restaurant-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center; margin-top: 4rem;
+  }
+  .restaurant-imgs {
+    position: relative;
+  }
+  .rest-img-main {
+    width: 100%; height: 400px; object-fit: cover;
+    box-shadow: 20px 20px 0 var(--wine);
+  }
+  .rest-img-small {
+    position: absolute; bottom: -30px; right: -30px;
+    width: 200px; height: 160px; object-fit: cover;
+    border: 4px solid var(--white);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  .menu-preview {
+    margin-top: 2rem; display: flex; flex-direction: column; gap: 0.8rem;
+  }
+  .menu-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 0; border-bottom: 1px dotted var(--mike-dark);
+  }
+  .menu-item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; color: var(--wine-dark); font-style: italic;
+  }
+  .menu-item-desc {
+    font-size: 0.82rem; color: var(--text-mid); margin-top: 2px;
+  }
+  .menu-item-price {
+    font-family: 'Montserrat', sans-serif; font-size: 0.9rem;
+    font-weight: 600; color: var(--wine);
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--mike); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem;
+  }
+  .service-card {
+    background: var(--white); padding: 2.5rem;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    text-align: center;
+  }
+  .service-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 10px 40px rgba(114,47,55,0.12);
+  }
+  .service-icon {
+    font-size: 2.5rem; margin-bottom: 1.2rem;
+    display: block;
+  }
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--wine-dark); margin-bottom: 0.7rem;
+  }
+  .service-desc {
+    font-size: 0.93rem; color: var(--text-mid); line-height: 1.7;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+  .about-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .about-img-stack { position: relative; height: 500px; }
+  .about-img-1 {
+    position: absolute; top: 0; left: 0;
+    width: 75%; height: 380px; object-fit: cover;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  .about-img-2 {
+    position: absolute; bottom: 0; right: 0;
+    width: 55%; height: 280px; object-fit: cover;
+    border: 6px solid var(--white);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  }
+  .about-badge {
+    position: absolute; top: 50%; left: 60%;
+    transform: translate(-50%, -50%);
+    background: var(--wine); color: var(--mike);
+    width: 100px; height: 100px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 3px solid var(--gold);
+    z-index: 10;
+  }
+  .about-badge-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900; color: var(--gold); line-height: 1;
+  }
+  .about-badge-text {
+    font-family: 'Montserrat', sans-serif; font-size: 8px;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--mike); text-align: center; line-height: 1.3;
+  }
+  .about-text .section-desc { max-width: 100%; }
+  .about-signature {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.8rem; color: var(--wine); margin-top: 2rem;
+  }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--wine-dark); }
+  #testimonials .section-label { color: var(--gold); }
+  #testimonials .section-label::before { background: var(--gold); }
+  #testimonials .section-title { color: var(--mike); }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem;
+  }
+  .testi-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 2.5rem;
+    position: relative;
+  }
+  .testi-quote {
+    font-size: 4rem; font-family: 'Playfair Display', serif;
+    color: var(--gold); opacity: 0.5; line-height: 1;
+    position: absolute; top: 1rem; right: 1.5rem;
+  }
+  .testi-text {
+    font-size: 1.05rem; color: var(--mike); line-height: 1.8;
+    font-style: italic; margin-bottom: 1.5rem;
+  }
+  .testi-author {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--wine); border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; color: var(--gold);
+  }
+  .testi-name {
+    font-family: 'Montserrat', sans-serif; font-size: 11px;
+    font-weight: 600; letter-spacing: 1px; color: var(--mike);
+  }
+  .testi-stars { color: var(--gold); font-size: 12px; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--mike-light); }
+  .contact-layout {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; margin-top: 4rem;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+  .contact-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+  .contact-icon {
+    width: 46px; height: 46px; flex-shrink: 0;
+    background: var(--wine); border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .contact-label {
+    font-family: 'Montserrat', sans-serif; font-size: 10px;
+    font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--wine); margin-bottom: 4px;
+  }
+  .contact-value {
+    font-size: 1rem; color: var(--text-mid); line-height: 1.6;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label {
+    font-family: 'Montserrat', sans-serif; font-size: 9px;
+    font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--wine);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--white); border: 1px solid var(--mike-dark);
+    padding: 14px; font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; color: var(--text-dark);
+    outline: none; transition: border-color 0.3s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--wine);
+  }
+  .form-group textarea { height: 120px; resize: vertical; }
+
+  /* ── BOOKING ── */
+  #booking {
+    background: linear-gradient(135deg, var(--wine-dark), var(--wine));
+    padding: 80px 0;
+  }
+  .booking-inner {
+    text-align: center; max-width: 900px; margin: 0 auto;
+  }
+  .booking-inner .section-label { color: var(--gold); justify-content: center; }
+  .booking-inner .section-label::before { background: var(--gold); }
+  .booking-inner .section-title { color: var(--mike); text-align: center; }
+  .booking-inner .section-desc { color: var(--mike-dark); margin: 0 auto 2rem; }
+  .booking-form {
+    display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 1rem;
+    background: rgba(255,255,255,0.08); padding: 2rem;
+    border: 1px solid rgba(201,168,76,0.3); margin-top: 2rem;
+  }
+  .booking-form .form-group label { color: var(--gold); }
+  .booking-form input,
+  .booking-form select {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--mike);
+  }
+  .booking-form input::placeholder { color: rgba(232,224,213,0.5); }
+  .booking-form input:focus,
+  .booking-form select:focus { border-color: var(--gold); }
+  .btn-book-now {
+    background: var(--gold); color: var(--wine-dark);
+    padding: 0 2rem; align-self: flex-end;
+    font-family: 'Montserrat', sans-serif; font-size: 10px;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    border: none; cursor: pointer; height: 52px;
+    transition: background 0.3s;
+  }
+  .btn-book-now:hover { background: var(--mike); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark); color: var(--mike);
+    padding: 60px 0 30px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    margin-bottom: 3rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .footer-brand .logo-name { font-size: 26px; margin-bottom: 0.3rem; }
+  .footer-brand .logo-tagline { font-size: 9px; }
+  .footer-about {
+    font-size: 0.92rem; color: rgba(232,224,213,0.6);
+    line-height: 1.8; margin-top: 1.2rem;
+  }
+  .footer-socials { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+  .social-btn {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(201,168,76,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; cursor: pointer; transition: background 0.3s;
+    text-decoration: none; color: var(--mike);
+  }
+  .social-btn:hover { background: var(--wine); border-color: var(--wine); }
+  .footer-col h4 {
+    font-family: 'Montserrat', sans-serif; font-size: 10px;
+    font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 0.7rem; }
+  .footer-links a {
+    font-size: 0.9rem; color: rgba(232,224,213,0.6);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-copy {
+    font-family: 'Montserrat', sans-serif; font-size: 10px;
+    letter-spacing: 1px; color: rgba(232,224,213,0.4);
+  }
+  .footer-copy span { color: var(--gold); }
+
+  /* ── BACK TO TOP ── */
+  #backTop {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 44px; height: 44px;
+    background: var(--wine); border: 1px solid var(--gold);
+    color: var(--mike); font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; transition: opacity 0.3s;
+    z-index: 500;
+  }
+  #backTop.visible { opacity: 1; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .rooms-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .g-item:first-child { grid-row: auto; }
+    .restaurant-layout,
+    .about-layout,
+    .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .booking-form { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .rest-img-small { display: none; }
+    .about-img-stack { height: 350px; }
+  }
+  @media (max-width: 600px) {
+    .rooms-grid, .services-grid, .features-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .booking-form { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 3.5rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <a href="#home" class="logo">
+    <div class="logo-icon">O</div>
+    <div class="logo-text">
+      <span class="logo-name">OLAD</span>
+      <span class="logo-tagline">Luxury Hotel & Suites</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#rooms">Rooms</a></li>
+    <li><a href="#restaurant">Restaurant</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#booking" class="nav-book">Book Now</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="toggleMenu()">Home</a>
+  <a href="#rooms" onclick="toggleMenu()">Rooms</a>
+  <a href="#restaurant" onclick="toggleMenu()">Restaurant</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="#booking" onclick="toggleMenu()">Book Now</a>
+</div>
+
+<!-- ── HERO ── -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Welcome to Akure's Finest</div>
+    <h1 class="hero-title">Hotel <span>Olad</span></h1>
+    <p class="hero-sub">Where Elegance Meets Nigerian Warmth</p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-primary">Reserve a Room</a>
+      <a href="#rooms" class="btn-outline">Explore Rooms</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ── FEATURES STRIP ── -->
+<div class="features-strip">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🛏</div>
+        <div class="feature-num">24+</div>
+        <div class="feature-label">Luxury Rooms</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🍽</div>
+        <div class="feature-num">3</div>
+        <div class="feature-label">Dining Options</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">⭐</div>
+        <div class="feature-num">4.9</div>
+        <div class="feature-label">Guest Rating</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🤝</div>
+        <div class="feature-num">24/7</div>
+        <div class="feature-label">Concierge Service</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ROOMS ── -->
+<section id="rooms">
+  <div class="container">
+    <div class="section-label">Accommodations</div>
+    <h2 class="section-title">Our <em>Rooms & Suites</em></h2>
+    <p class="section-desc">Each room is a sanctuary of comfort, blending contemporary elegance with the warm hospitality Olad is known for.</p>
+    <div class="rooms-grid">
+
+      <!-- Room 1 -->
+      <div class="room-card">
+        <div class="room-img">
+          <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80" alt="Standard Room">
+          <span class="room-badge">Standard</span>
+        </div>
+        <div class="room-body">
+          <div class="room-name">Classic Room</div>
+          <p class="room-desc">Tastefully appointed room with queen bed, natural light, and all essential amenities for a restful stay.</p>
+          <div class="room-amenities">
+            <span class="amenity">WiFi</span>
+            <span class="amenity">AC</span>
+            <span class="amenity">TV</span>
+            <span class="amenity">Breakfast</span>
+          </div>
+          <div class="room-footer">
+            <div class="room-price">
+              <div class="from">From</div>
+              <span class="amount">₦18,000</span>
+              <span class="per">/night</span>
+            </div>
+            <button class="btn-sm" onclick="document.querySelector('#booking').scrollIntoView({behavior:'smooth'})">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Room 2 -->
+      <div class="room-card">
+        <div class="room-img">
+          <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=700&q=80" alt="Deluxe Room">
+          <span class="room-badge">Deluxe</span>
+        </div>
+        <div class="room-body">
+          <div class="room-name">Deluxe Room</div>
+          <p class="room-desc">Spacious deluxe room with king bed, seating area, and premium furnishings for an elevated experience.</p>
+          <div class="room-amenities">
+            <span class="amenity">WiFi</span>
+            <span class="amenity">AC</span>
+            <span class="amenity">Mini Bar</span>
+            <span class="amenity">Balcony</span>
+          </div>
+          <div class="room-footer">
+            <div class="room-price">
+              <div class="from">From</div>
+              <span class="amount">₦28,000</span>
+              <span class="per">/night</span>
+            </div>
+            <button class="btn-sm" onclick="document.querySelector('#booking').scrollIntoView({behavior:'smooth'})">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Room 3 -->
+      <div class="room-card">
+        <div class="room-img">
+          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=700&q=80" alt="Executive Suite">
+          <span class="room-badge">Suite</span>
+        </div>
+        <div class="room-body">
+          <div class="room-name">Executive Suite</div>
+          <p class="room-desc">Our premium suite with a separate living area, workspace, and lavish bathroom — the ultimate indulgence.</p>
+          <div class="room-amenities">
+            <span class="amenity">Jacuzzi</span>
+            <span class="amenity">Lounge</span>
+            <span class="amenity">Butler</span>
+            <span class="amenity">Premium WiFi</span>
+          </div>
+          <div class="room-footer">
+            <div class="room-price">
+              <div class="from">From</div>
+              <span class="amount">₦55,000</span>
+              <span class="per">/night</span>
+            </div>
+            <button class="btn-sm" onclick="document.querySelector('#booking').scrollIntoView({behavior:'smooth'})">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Room 4 -->
+      <div class="room-card">
+        <div class="room-img">
+          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=700&q=80" alt="Family Room">
+          <span class="room-badge">Family</span>
+        </div>
+        <div class="room-body">
+          <div class="room-name">Family Room</div>
+          <p class="room-desc">Ideal for families, featuring two queen beds, a play area, and kid-friendly amenities in a generous space.</p>
+          <div class="room-amenities">
+            <span class="amenity">2 Beds</span>
+            <span class="amenity">WiFi</span>
+            <span class="amenity">AC</span>
+            <span class="amenity">Kitchenette</span>
+          </div>
+          <div class="room-footer">
+            <div class="room-price">
+              <div class="from">From</div>
+              <span class="amount">₦38,000</span>
+              <span class="per">/night</span>
+            </div>
+            <button class="btn-sm" onclick="document.querySelector('#booking').scrollIntoView({behavior:'smooth'})">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Room 5 -->
+      <div class="room-card">
+        <div class="room-img">
+          <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=700&q=80" alt="Business Room">
+          <span class="room-badge">Business</span>
+        </div>
+        <div class="room-body">
+          <div class="room-name">Business Room</div>
+          <p class="room-desc">Designed for the modern professional with a large work desk, high-speed WiFi, and ergonomic seating.</p>
+          <div class="room-amenities">
+            <span class="amenity">Fast WiFi</span>
+            <span class="amenity">Desk</span>
+            <span class="amenity">AC</span>
+            <span class="amenity">Coffee</span>
+          </div>
+          <div class="room-footer">
+            <div class="room-price">
+              <div class="from">From</div>
+              <span class="amount">₦32,000</span>
+              <span class="per">/night</span>
+            </div>
+            <button class="btn-sm" onclick="document.querySelector('#booking').scrollIntoView({behavior:'smooth'})">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Room 6 -->
+      <div class="room-card">
+        <div class="room-img">
+          <img src="https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=700&q=80" alt="Presidential Suite">
+          <span class="room-badge">Presidential</span>
+        </div>
+        <div class="room-body">
+          <div class="room-name">Presidential Suite</div>
+          <p class="room-desc">The crown jewel of Olad — a lavish two-room suite with panoramic views, private dining, and personal butler.</p>
+          <div class="room-amenities">
+            <span class="amenity">2 Rooms</span>
+            <span class="amenity">Butler</span>
+            <span class="amenity">Dining</span>
+            <span class="amenity">Bar</span>
+          </div>
+          <div class="room-footer">
+            <div class="room-price">
+              <div class="from">From</div>
+              <span class="amount">₦90,000</span>
+              <span class="per">/night</span>
+            </div>
+            <button class="btn-sm" onclick="document.querySelector('#booking').scrollIntoView({behavior:'smooth'})">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-label">Photo Gallery</div>
+    <h2 class="section-title" style="color:var(--mike)">A Glimpse of <em style="color:var(--gold)">Olad</em></h2>
+    <div class="gallery-grid">
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=80" alt="Hotel Exterior">
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&q=80" alt="Hotel Lobby">
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600&q=80" alt="Swimming Pool">
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Restaurant">
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80" alt="Spa">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESTAURANT ── -->
+<section id="restaurant">
+  <div class="container">
+    <div class="restaurant-layout">
+      <div class="restaurant-imgs">
+        <img class="rest-img-main" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Restaurant interior">
+        <img class="rest-img-small" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Food">
+      </div>
+      <div>
+        <div class="section-label">Dining</div>
+        <h2 class="section-title">The Olad <em>Kitchen</em></h2>
+        <p class="section-desc">A celebration of Nigerian flavours elevated with international techniques. From rich soups to grilled perfection, every meal is an experience.</p>
+        <div class="menu-preview">
+          <div class="menu-item">
+            <div>
+              <div class="menu-item-name">Pounded Yam & Egusi Soup</div>
+              <div class="menu-item-desc">Freshly pounded yam with melon seed soup & assorted meat</div>
+            </div>
+            <div class="menu-item-price">₦4,500</div>
+          </div>
+          <div class="menu-item">
+            <div>
+              <div class="menu-item-name">Grilled Tilapia Platter</div>
+              <div class="menu-item-desc">Whole grilled tilapia with jollof rice & plantain</div>
+            </div>
+            <div class="menu-item-price">₦6,800</div>
+          </div>
+          <div class="menu-item">
+            <div>
+              <div class="menu-item-name">Suya & Pepper Skewers</div>
+              <div class="menu-item-desc">Spiced beef skewers with yaji & fresh onion salad</div>
+            </div>
+            <div class="menu-item-price">₦3,500</div>
+          </div>
+          <div class="menu-item">
+            <div>
+              <div class="menu-item-name">Continental Breakfast</div>
+              <div class="menu-item-desc">Eggs, toast, fruit, juice & freshly brewed coffee</div>
+            </div>
+            <div class="menu-item-price">₦2,800</div>
+          </div>
+        </div>
+        <a href="#contact" class="btn-primary" style="margin-top:2rem; display:inline-block">Reserve a Table</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="container">
+    <div class="section-label">Our Services</div>
+    <h2 class="section-title">Everything You <em>Need</em></h2>
+    <p class="section-desc">From wellness to business, Olad provides a complete suite of services to make every stay exceptional.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">🏊</span>
+        <div class="service-name">Swimming Pool</div>
+        <p class="service-desc">Relax in our pristine outdoor pool. Open daily from 6am – 10pm for all guests.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💆</span>
+        <div class="service-name">Spa & Wellness</div>
+        <p class="service-desc">Rejuvenate body and mind with our range of therapeutic treatments and massages.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🏋️</span>
+        <div class="service-name">Fitness Centre</div>
+        <p class="service-desc">Modern gym equipment available 24/7. Personal training sessions on request.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🤝</span>
+        <div class="service-name">Conference Hall</div>
+        <p class="service-desc">Fully-equipped conference facilities for meetings, workshops, and corporate events.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🚗</span>
+        <div class="service-name">Airport Transfers</div>
+        <p class="service-desc">Seamless pick-up and drop-off service. Pre-book your ride for a smooth arrival.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🎉</span>
+        <div class="service-name">Event Hosting</div>
+        <p class="service-desc">From weddings to birthday parties — our team handles every detail with precision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-img-stack">
+        <img class="about-img-1" src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="Hotel Exterior">
+        <img class="about-img-2" src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&q=80" alt="Hotel Lobby">
+        <div class="about-badge">
+          <div class="about-badge-num">★</div>
+          <div class="about-badge-text">Premium<br>Service</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">The Heart of <em>Olad</em></h2>
+        <p class="section-desc">Nestled in the vibrant city of Akure, Hotel Olad was born from a vision — to create a haven where Nigerian warmth and world-class hospitality converge. Located on Oluwatuyi Street, Onu-Ara, we've become the preferred choice for discerning travellers across Ondo State and beyond.</p>
+        <p class="section-desc" style="margin-top:1rem">We believe every guest deserves to feel at home — cared for, comfortable, and celebrated. Our dedicated team brings this belief to life every single day.</p>
+        <div class="about-signature">— The Olad Family</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-label">Guest Reviews</div>
+    <h2 class="section-title">What Our <em style="color:var(--gold)">Guests</em> Say</h2>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The Executive Suite was absolutely breathtaking. The staff treated us like royalty from check-in to check-out. We will definitely be returning!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div>
+            <div class="testi-name">Adaeze Nwosu</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The food at Olad Kitchen is simply unmatched. The pounded yam and egusi soup brought me to tears — it reminded me of home! Highly recommend.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">K</div>
+          <div>
+            <div class="testi-name">Kunle Adeyemi</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">I hosted my company retreat here and everything went flawlessly. The conference hall was pristine and the catering was superb. 10 out of 10.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">T</div>
+          <div>
+            <div class="testi-name">Tunde Okonkwo</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOKING ── -->
+<section id="booking">
+  <div class="container">
+    <div class="booking-inner">
+      <div class="section-label">Reserve Your Stay</div>
+      <h2 class="section-title">Book Your <em style="color:var(--gold)">Room</em></h2>
+      <p class="section-desc">Experience the warmth and elegance of Olad. Reserve directly for the best rates.</p>
+      <div class="booking-form">
+        <div class="form-group">
+          <label>Check-In Date</label>
+          <input type="date" id="checkin">
+        </div>
+        <div class="form-group">
+          <label>Check-Out Date</label>
+          <input type="date" id="checkout">
+        </div>
+        <div class="form-group">
+          <label>Room Type</label>
+          <select id="roomtype" style="background:rgba(255,255,255,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--mike);padding:14px;font-family:'Cormorant Garamond',serif;font-size:1rem;outline:none;width:100%">
+            <option value="" style="background:#4a1a1e">Select Room</option>
+            <option value="classic" style="background:#4a1a1e">Classic Room – ₦18,000/night</option>
+            <option value="deluxe" style="background:#4a1a1e">Deluxe Room – ₦28,000/night</option>
+            <option value="executive" style="background:#4a1a1e">Executive Suite – ₦55,000/night</option>
+            <option value="family" style="background:#4a1a1e">Family Room – ₦38,000/night</option>
+            <option value="business" style="background:#4a1a1e">Business Room – ₦32,000/night</option>
+            <option value="presidential" style="background:#4a1a1e">Presidential Suite – ₦90,000/night</option>
+          </select>
+        </div>
+        <button class="btn-book-now" onclick="handleBooking()">Check Availability</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Contact <em>Us</em></h2>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Address</div>
+            <div class="contact-value">Oluwatuyi Street, Onu-Ara<br>Akure, Ondo State, Nigeria</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+234 800 000 0000<br>+234 811 000 0000</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">reservations@oladhotel.com<br>info@oladhotel.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Reception Hours</div>
+            <div class="contact-value">24 Hours · 7 Days a Week<br>Always at your service</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Doe">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+234 800 000 0000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select>
+            <option>Room Reservation</option>
+            <option>Restaurant Booking</option>
+            <option>Event Enquiry</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="How can we assist you?"></textarea>
+        </div>
+        <button class="btn-primary" onclick="handleContactForm()" style="cursor:pointer;border:none;width:fit-content">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="text-decoration:none; display:flex; align-items:center; gap:12px; margin-bottom:1rem;">
+          <div class="logo-icon" style="width:40px;height:40px;font-size:18px">O</div>
+          <div>
+            <div class="logo-name">OLAD</div>
+            <div class="logo-tagline">Luxury Hotel & Suites</div>
+          </div>
+        </div>
+        <p class="footer-about">Where every stay is a story worth telling. Experience the finest hospitality in the heart of Akure, Ondo State.</p>
+        <div class="footer-socials">
+          <a class="social-btn" href="#" title="Facebook">f</a>
+          <a class="social-btn" href="#" title="Instagram">ig</a>
+          <a class="social-btn" href="#" title="Twitter">tw</a>
+          <a class="social-btn" href="#" title="WhatsApp">wa</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#rooms">Rooms & Suites</a>
+          <a href="#restaurant">Restaurant</a>
+          <a href="#services">Services</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#about">About Us</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Rooms</h4>
+        <div class="footer-links">
+          <a href="#rooms">Classic Room</a>
+          <a href="#rooms">Deluxe Room</a>
+          <a href="#rooms">Executive Suite</a>
+          <a href="#rooms">Family Room</a>
+          <a href="#rooms">Business Room</a>
+          <a href="#rooms">Presidential Suite</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="#services">Swimming Pool</a>
+          <a href="#services">Spa & Wellness</a>
+          <a href="#services">Fitness Centre</a>
+          <a href="#services">Conference Hall</a>
+          <a href="#services">Airport Transfer</a>
+          <a href="#services">Event Hosting</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2024 <span>Hotel Olad</span>. All Rights Reserved. Oluwatuyi Street, Onu-Ara, Akure, Nigeria.</p>
+      <p class="footer-copy">Crafted with ❤️ for <span>Olad Hospitality</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<div id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      nav.style.height = '65px';
+    } else {
+      nav.style.height = '80px';
+    }
+    document.getElementById('backTop').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.room-card, .service-card, .testi-card, .contact-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Booking handler
+  function handleBooking() {
+    const ci = document.getElementById('checkin').value;
+    const co = document.getElementById('checkout').value;
+    const room = document.getElementById('roomtype').value;
+    if (!ci || !co || !room) {
+      alert('Please fill in all booking details.');
+      return;
+    }
+    if (new Date(co) <= new Date(ci)) {
+      alert('Check-out date must be after check-in date.');
+      return;
+    }
+    const nights = Math.round((new Date(co) - new Date(ci)) / 86400000);
+    const prices = { classic: 18000, deluxe: 28000, executive: 55000, family: 38000, business: 32000, presidential: 90000 };
+    const names = { classic: 'Classic Room', deluxe: 'Deluxe Room', executive: 'Executive Suite', family: 'Family Room', business: 'Business Room', presidential: 'Presidential Suite' };
+    const total = (prices[room] * nights).toLocaleString();
+    alert(`✅ Booking Request Sent!\n\nRoom: ${names[room]}\nCheck-in: ${ci}\nCheck-out: ${co}\nDuration: ${nights} night(s)\nEstimated Total: ₦${total}\n\nOur team will contact you shortly to confirm your reservation.\n\nThank you for choosing Hotel Olad! 🏨`);
+  }
+
+  // Contact form handler
+  function handleContactForm() {
+    alert('✅ Thank you for your message!\n\nA member of the Olad team will get back to you within 24 hours.\n\nWe look forward to hosting you! 🤝');
+  }
+
+  // Set min date for booking
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('checkin').min = today;
+  document.getElementById('checkout').min = today;
+</script>
+
+</body>
+</html>
